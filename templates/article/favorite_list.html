@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}
+    我的收藏
+{% endblock title %}
+
+{% block content %}
+<style type="text/css">
+a:link{color:black;}
+a:visited{color:black;}
+a:hover{color:red;}
+</style>
+{% for favorite in favorites %}
+<div class="container">
+	<div class="row mt-2">
+		<div class="col-sm-12">
+			<div class ="card h-100">
+				<div class="card-body">
+                    <h4 class="card-title">{{ favorite.article.title }}</h4>
+                    <p class="card-text">{{ favorite.article.body|slice:'100' }}...</p>
+                    <a href="{% url 'detail' favorite.article.id %}"  class="card-link">点击阅读</a>
+                    <small class="col align-self-end" style="color: black;">
+                            <span class="bi bi-eye">
+                                <h8>阅读量</h8>
+                            {{ favorite.article.total_views }}
+                            </span>
+                    </small>
+                </div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+{% endblock content %}
